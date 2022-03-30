@@ -1,0 +1,42 @@
+.posts {
+   max-width: 1093px;
+   margin-left: auto;
+   position: relative;
+   @media (max-width: 576px) {
+      margin-left: 0;
+   }
+   &__title {
+      margin-bottom: 44px;
+      @media (max-width: 768px) {
+         margin-bottom: 24px;
+      }
+   }
+   &__content {
+      padding-left: 134px;
+      @media (max-width: 576px) {
+         padding-left: 10px;
+      }
+   }
+   &__loader {
+      margin-top: 100px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      @media (max-width: 576px) {
+         padding-left: 10px;
+      }
+   }
+   &__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 19px;
+   }
+}
+.quotes {
+   position: absolute;
+   top: 5px;
+   left: 0;
+   @media (max-width: 576px) {
+      display: none;
+   }
+}

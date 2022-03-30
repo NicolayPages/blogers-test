@@ -1,0 +1,14 @@
+.header {
+   margin-bottom: 32px;
+   text-align: center;
+   &__title {
+      margin-bottom: 20px;
+      @media (max-width: 768px) {
+         margin-bottom: 10px;
+      }
+   }
+   &__subtitle {
+      max-width: 432px;
+      margin: 0 auto;
+   }
+}

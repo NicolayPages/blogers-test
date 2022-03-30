@@ -1,0 +1,42 @@
+.user {
+   &__image {
+      margin-bottom: 19px;
+      max-width: 290px;
+      cursor: pointer;
+      overflow: hidden;
+      @media (max-width: 1024px) {
+         max-width: 100%;
+      }
+      &:hover {
+         img {
+            transform: scale(1.1);
+         }
+      }
+      img {
+         transition: all 0.3s ease 0s;
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+   }
+}
+.user.active {
+   .user__name {
+      color: #fe8700;
+   }
+   .user__company {
+      color: #fe8700;
+   }
+   .user__image {
+      position: relative;
+      &:after {
+         content: "";
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         height: 4px;
+         width: 100%;
+         background: #fe8700;
+      }
+   }
+}

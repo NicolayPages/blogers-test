@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import "_nullstyle";
+
+/*----------var------------*/
+$ff: "Poppins", sans-serif;
+$color: #606f81;
+$fw: 400;
+$fz: 14px;
+$lh: 135%;
+/*----------var------------*/
+$textColor: #606f81;
+$titleColor: #384758;
+$specialColor: #fe8700;
+$bg: #ffffff;
+
+/*----------media------------*/
+$pc: 1440px;
+$lp: 1024px;
+$tb: 768px;
+$mb: 576px;
+$ms: 425px;
+/*----------media------------*/
+
+/*----------mixins------------*/
+$maxWidth: 1440;
+@mixin adaptiv-font($pcSize, $mobSize) {
+   $addSize: $pcSize - $mobSize;
+   $maxWidth: $maxWidth - 320;
+   font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+}
+/*----------mixins------------*/
+
+::-webkit-scrollbar {
+   width: 10px;
+}
+::-webkit-scrollbar-thumb {
+   background-color: #c4c4c4;
+   border-radius: 3px;
+}
+
+/*----------tags------------*/
+html {
+   scroll-behavior: smooth;
+}
+body {
+   font-family: $ff;
+   color: $color;
+   font-weight: $fw;
+   font-size: $fz;
+   line-height: $lh;
+   overflow-x: hidden;
+   &.lock {
+      overflow-y: hidden;
+   }
+}
+img {
+   max-width: 100%;
+}
+/*----------tags------------*/
+
+/*----------general------------*/
+.container {
+   max-width: 1310px;
+   margin: 0 auto;
+   padding: 0 15px;
+}
+
+.title {
+   @include adaptiv-font(48, 32);
+   font-weight: 600;
+   line-height: $lh;
+   color: $titleColor;
+}
+.name {
+   @include adaptiv-font(24, 20);
+   font-weight: 500;
+   line-height: $lh;
+   color: $titleColor;
+}
+.text {
+   @include adaptiv-font(20, 16);
+   font-weight: 400;
+   line-height: $lh;
+   color: $textColor;
+}
+.subtitle {
+   @include adaptiv-font(18, 14);
+   font-weight: 400;
+   line-height: $lh;
+   color: $textColor;
+}
+
+.leftBase {
+   position: absolute;
+   z-index: -1;
+   max-width: 310px;
+   @media (max-width: $tb) {
+      max-width: 200px;
+   }
+   top: 930px;
+   left: -104px;
+}
+.rightBase {
+   position: absolute;
+   z-index: -1;
+   top: 245px;
+   right: -67px;
+}
+/*----------general------------*/
