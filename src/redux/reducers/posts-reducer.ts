@@ -12,7 +12,6 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 let initialState = {
    isLoading: false,
    posts: [] as Array<PostsType>,
-   sortedPosts: [] as Array<PostsType>,
    error: '',
    limit: 3,
    name: ''
@@ -22,22 +21,21 @@ const postsReducer = (state = initialState, action: ActionTypes): InitialStateTy
    switch (action.type) {
       case 'IS_LOADING':
          return {
-            ...state, isLoading: action.payload
+            ...state, isLoading: action.payload.isLoading
          };
       case 'SET_ERROR':
          return {
-            ...state, error: action.payload
-         };
-      case 'SET_SORTED_POSTS':
-         return {
-            ...state,
-            sortedPosts: action.payload.posts.filter((p: PostsType) => p.userId === action.payload.id).slice(0, action.payload.limit),
-            name: action.payload.name
+            ...state, error: action.payload.error
          };
       case 'SET_POSTS':
          return {
             ...state,
-            posts: action.payload,
+            posts: action.payload.posts,
+         };
+      case 'SET_NAME':
+         return {
+            ...state,
+            name: action.payload.name,
          };
       default:
          return state;
@@ -45,20 +43,19 @@ const postsReducer = (state = initialState, action: ActionTypes): InitialStateTy
 };
 
 export const actions = {
-   setIsLoading: (payload: boolean) => ({ type: 'IS_LOADING', payload } as const),
-   setError: (payload: string) => ({ type: 'SET_ERROR', payload } as const),
-   setPosts: (payload: Array<PostsType>) => ({ type: 'SET_POSTS', payload } as const),
-   setSortedPosts: (posts: Array<PostsType>, limit: number, id: number, name: string) =>
-      ({ type: 'SET_SORTED_POSTS', payload: { posts, limit, id, name } } as const),
+   setIsLoading: (isLoading: boolean) => ({ type: 'IS_LOADING', payload: { isLoading } } as const),
+   setError: (error: string) => ({ type: 'SET_ERROR', payload: { error } } as const),
+   setPosts: (posts: Array<PostsType>) => ({ type: 'SET_POSTS', payload: { posts } } as const),
+   setName: (name: string) => ({ type: 'SET_NAME', payload: { name } } as const),
 }
 
 
 export const requestPosts = (limit: number, id: number, name: string): ThunkType => async (dispatch) => {
    try {
       dispatch(actions.setIsLoading(true))
-      let response = await postsAPI.getPosts()
+      let response = await postsAPI.getPosts(id, limit)
       dispatch(actions.setPosts(response.data))
-      dispatch(actions.setSortedPosts(response.data, limit, id, name))
+      dispatch(actions.setName(name))
       dispatch(actions.setIsLoading(false))
    } catch (error: any) {
       dispatch(actions.setIsLoading(false))

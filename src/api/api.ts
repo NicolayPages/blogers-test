@@ -20,8 +20,13 @@ export const usersAPI = {
 
 
 export const postsAPI = {
-   getPosts() {
-      return instance.get(`posts`).then((response) => {
+   getPosts(userId: number, limit: number) {
+      return instance.get(`posts`, {
+         params: {
+            userId: userId,
+            _limit: limit,
+         }
+      }).then((response) => {
          return response;
       });
    },

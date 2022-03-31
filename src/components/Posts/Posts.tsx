@@ -17,12 +17,14 @@ type PropsType = {
 
 export const Posts: FC<PropsType> = memo(({ users }) => {
 
-   const { isLoading, name, limit, sortedPosts } = useTypedSelector(state => state.posts)
+   const { isLoading, name, limit, posts } = useTypedSelector(state => state.posts)
    const { toggleIsFollowing } = actions
    const dispatch = useDispatch()
 
    useEffect(() => {
-      dispatch(requestPosts(limit, users[0]?.id, users[0]?.name))
+      if (posts.length < 1) {
+         dispatch(requestPosts(limit, users[0]?.id, users[0]?.name))
+      }
       dispatch(toggleIsFollowing(true, users[0]?.id))
    }, []);
 
@@ -38,8 +40,8 @@ export const Posts: FC<PropsType> = memo(({ users }) => {
                      {`${limit} актуальных поста ${name}`}
                   </h2>
                   <div className='posts__wrapper'>
-                     {sortedPosts
-                        ? sortedPosts.map(post => <Post key={post.id} info={post} />)
+                     {posts
+                        ? posts.map(post => <Post key={post.id} info={post} />)
                         : 'Posts not found'
                      }
                   </div>

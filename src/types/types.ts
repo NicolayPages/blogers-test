@@ -13,3 +13,8 @@ export type PostsType = {
    title: string
    body: string
 }
+
+export type AvatarsType = {
+   address: string
+}
+
