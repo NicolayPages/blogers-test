@@ -14,7 +14,5 @@ export type PostsType = {
    body: string
 }
 
-export type AvatarsType = {
-   address: string
-}
+
 

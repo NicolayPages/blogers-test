@@ -14,7 +14,7 @@ import './slider.scss';
 
 export const Slider: FC = memo(() => {
 
-   const { users, isFollowing, avatars } = useTypedSelector(state => state.users)
+   const { users, isFollowing } = useTypedSelector(state => state.users)
    const { toggleIsFollowing } = actions
    const { limit, posts } = useTypedSelector(state => state.posts)
    const dispatch = useDispatch()
@@ -26,7 +26,6 @@ export const Slider: FC = memo(() => {
       dispatch(toggleIsFollowing(true, userId))
    }
 
-
    let usersList = users.map(user =>
       <SwiperSlide key={user.id}>
          <User
@@ -35,6 +34,7 @@ export const Slider: FC = memo(() => {
             info={user}
          />
       </SwiperSlide>)
+
 
    return (
       <div className="slider">

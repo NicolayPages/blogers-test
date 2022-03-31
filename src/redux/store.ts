@@ -1,11 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
+import errorsReducer from "./reducers/errors-reducer";
 import postsReducer from "./reducers/posts-reducer";
 import usersReducer from "./reducers/users-reducer";
 
 const rootReducer = combineReducers({
    users: usersReducer,
-   posts: postsReducer
+   posts: postsReducer,
+   errors: errorsReducer,
 });
 
 type RootReducerType = typeof rootReducer;

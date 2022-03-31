@@ -1,17 +1,17 @@
 import React, { FC, memo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import base from '../../assets/images/base.svg';
+import ErrorPopup from '../../components/ErrorPopup/ErrorPopup';
 import { Header } from '../../components/Header/Header';
 import { Posts } from '../../components/Posts/Posts';
 import Preloader from '../../components/Preloader/Preloader';
 import { Slider } from '../../components/Slider/Slider';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { requestPosts } from '../../redux/reducers/posts-reducer';
 import { requestUsers } from '../../redux/reducers/users-reducer';
 import './main.scss';
 
 const Main: FC = memo(() => {
-   const { users } = useTypedSelector(state => state.users)
+   const { users, isLoading } = useTypedSelector(state => state.users)
    const dispatch = useDispatch()
 
    useEffect(() => {
